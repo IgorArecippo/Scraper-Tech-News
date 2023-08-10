@@ -1,7 +1,24 @@
+import requests
+import time
+BASE_URL = "https://blog.betrybe.com"
+
+
 # Requisito 1
 def fetch(url):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    headers = {
+        "user-agent": "Fake user-agent"
+    }
+
+    try:
+        res = requests.get(url, header=headers, timeout=3)
+        time.sleep(1)
+
+        if res.status_code == 200:
+            return res.text
+        else:
+            return None
+    except requests.exceptions.Timeout:
+        return None
 
 
 # Requisito 2
