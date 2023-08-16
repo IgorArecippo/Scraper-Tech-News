@@ -32,5 +32,10 @@ def search_by_date(date):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    news_found = db.news.find(
+        {"category": {"$regex": category, "$options": "i"}},
+        {"_id": 0, "title": 1, "url": 1}
+    )
+    results = [(news["title"], news["url"]) for news in news_found]
+    return results
     raise NotImplementedError
